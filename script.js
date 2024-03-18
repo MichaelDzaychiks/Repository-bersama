@@ -1,6 +1,3 @@
-//Initial References
-
-//Questions Or Images
 const questions = [
     {
       image: "images/Alakazam.png",
@@ -122,26 +119,20 @@ const questions = [
   let countdown,
     count = 11;
   
-  //Random value from array
   const randomValueGenerator = (array) =>
     array[Math.floor(Math.random() * array.length)];
   
-  //Random shuffle array
   const randomShuffle = (array) => array.sort(() => 0.5 - Math.random());
   
-  //Start game
   const startGame = () => {
-    //Select random 5 questions
     scoreContainer.classList.add("hide");
     gameContainer.classList.remove("hide");
     finalQuestions = populateQuestions();
     score = 0;
     currentQuestion = 0;
-    //Generate card for first question
     cardGenerator(finalQuestions[currentQuestion]);
   };
   
-  //Timer
   const timerDisplay = () => {
     countdown = setInterval(() => {
       count -= 1;
@@ -153,7 +144,6 @@ const questions = [
     }, 1000);
   };
   
-  //Create options
   const populateOptions = (correct_option) => {
     let arr = [];
     arr.push(correct_option);
@@ -168,12 +158,10 @@ const questions = [
     return arr;
   };
   
-  //Choose random questions
   const populateQuestions = () => {
     let questionsCount = 0;
     let chosenObjects = [];
     let questionsBatch = [];
-    //5 Questions
     while (questionsCount < 5) {
       let randomvalue = randomValueGenerator(questions);
       let index = questions.indexOf(randomvalue);
@@ -186,7 +174,6 @@ const questions = [
     return questionsBatch;
   };
   
-  //check selected answer
   const checker = (e) => {
     let userSolution = e.target.innerText;
     let options = document.querySelectorAll(".option");
@@ -203,15 +190,12 @@ const questions = [
     }
   
     clearInterval(countdown);
-    //disable all options
     options.forEach((element) => {
       element.disabled = true;
     });
   };
   
-  //Next question
   const nextQuestion = (e) => {
-    //increment currentQuestion
     currentQuestion += 1;
     if (currentQuestion == finalQuestions.length) {
       gameContainer.classList.add("hide");
@@ -225,7 +209,6 @@ const questions = [
     }
   };
   
-  //Card UI
   const cardGenerator = (cardObject) => {
     const { image, correct_option } = cardObject;
     let options = randomShuffle(populateOptions(correct_option));
@@ -252,10 +235,8 @@ const questions = [
       </div>
   
     </div>`;
-    //For timer
     count = 11;
     clearInterval(countdown);
-    //Display timer
     timerDisplay();
   };
   
